@@ -86,7 +86,7 @@ namespace QRMenuAPI.Controllers
         }
 
         [HttpPost]
-//        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<Company>> PostCompany(Company company)
         {
           if (_context.Companies == null)
