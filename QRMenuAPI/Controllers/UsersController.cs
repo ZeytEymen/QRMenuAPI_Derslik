@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using QRMenuAPI.Data;
 using QRMenuAPI.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace QRMenuAPI.Controllers
 {
@@ -42,6 +44,7 @@ namespace QRMenuAPI.Controllers
             return applicationUser;
         }
 
+        [Authorize(Roles = "CompanyAdministrator")]
         [HttpPut("{id}")]
         public OkResult PutApplicationUser(ApplicationUser applicationUser)
         {
@@ -56,6 +59,7 @@ namespace QRMenuAPI.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "CompanyAdministrator")]
         [HttpPost]
         public string PostApplicationUser(ApplicationUser applicationUser, string passWord)
         {
@@ -63,6 +67,7 @@ namespace QRMenuAPI.Controllers
             return applicationUser.Id;
         }
 
+        [Authorize(Roles = "CompanyAdministrator")]
         [HttpDelete("{id}")]
         public ActionResult DeleteApplicationUser(string id)
         {
@@ -82,12 +87,18 @@ namespace QRMenuAPI.Controllers
         {
             Microsoft.AspNetCore.Identity.SignInResult signInResult;
             ApplicationUser applicationUser = _signInManager.UserManager.FindByNameAsync(userName).Result;
+            Claim claim;
 
             if (applicationUser == null)
             {
                 return false;
             }
             signInResult = _signInManager.PasswordSignInAsync(applicationUser, passWord, false, false).Result;
+            if (signInResult.Succeeded == true)
+            {
+                claim = new Claim("CompanyId", applicationUser.CompanyId.ToString());
+                _signInManager.UserManager.AddClaimAsync(applicationUser, claim).Wait();
+            }
             return signInResult.Succeeded;
         }
 

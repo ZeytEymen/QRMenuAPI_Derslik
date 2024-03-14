@@ -257,21 +257,6 @@ namespace QRMenuAPI.Migrations
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.InsertData(
-                table: "States",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { (byte)0, "Deleted" });
-
-            migrationBuilder.InsertData(
-                table: "States",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { (byte)1, "Active" });
-
-            migrationBuilder.InsertData(
-                table: "States",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { (byte)2, "Passive" });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",

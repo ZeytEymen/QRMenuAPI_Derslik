@@ -24,11 +24,6 @@ namespace QRMenuAPI.Data
             modelBuilder.Entity<Restaurant>().HasOne(r => r.State).WithMany().OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<RestaurantUser>().HasKey(r => new { r.RestaurantId, r.UserId });
             modelBuilder.Entity<RestaurantUser>().HasOne(r => r.Restaurant).WithMany().OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<State>().HasData(
-            new State { Id = 0, Name = "Deleted" },
-            new State { Id = 1, Name = "Active" },
-            new State { Id = 2, Name = "Passive" }
-            );
             base.OnModelCreating(modelBuilder);
         }
     }

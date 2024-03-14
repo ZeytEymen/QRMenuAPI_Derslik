@@ -12,6 +12,7 @@ public class Program
         State state;
         IdentityRole identityRole;
         ApplicationUser applicationUser;
+        Company? company = null;
 
         var builder = WebApplication.CreateBuilder(args);
 
@@ -61,6 +62,19 @@ public class Program
                     state.Name = "Passive";
                     context.States.Add(state);
                 }
+                if(context.Companies.Count()==0)
+                {
+                    company = new Company();
+                    company.Address = "adres";
+                    company.EMail = "abc@def.com";
+                    company.Name = "Company";
+                    company.Phone = "1112223344";
+                    company.PostalCode = "12345";
+                    company.RegisterDate = DateTime.Today;
+                    company.StateId = 1;
+                    company.TaxNumber = "11111111111";
+                    context.Companies.Add(company);
+                }
                 context.SaveChanges();
                 RoleManager<IdentityRole>? roleManager = app.Services.CreateScope().ServiceProvider.GetService<RoleManager<IdentityRole>>();
                 if (roleManager != null)
@@ -78,13 +92,23 @@ public class Program
                 {
                     if (userManager.Users.Count() == 0)
                     {
-                        applicationUser = new ApplicationUser();
-                        applicationUser.UserName = "Administrator";
-                        userManager.CreateAsync(applicationUser,"Admin123!").Wait();
-                        userManager.AddToRoleAsync(applicationUser, "Administrator").Wait();
+                        if (company != null)
+                        {
+                            applicationUser = new ApplicationUser();
+                            applicationUser.UserName = "Administrator";
+                            applicationUser.CompanyId = company.Id;
+                            applicationUser.Name = "Administrator";
+                            applicationUser.Email = "abc@def.com";
+                            applicationUser.PhoneNumber = "1112223344";
+                            applicationUser.RegisterDate = DateTime.Today;
+                            applicationUser.StateId = 1;
+                            userManager.CreateAsync(applicationUser, "Admin123!").Wait();
+                            userManager.AddToRoleAsync(applicationUser, "Administrator").Wait();
+                        }
                     }
                 }
             }
+
         }
         app.Run();
     }

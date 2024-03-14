@@ -12,7 +12,7 @@ using QRMenuAPI.Data;
 namespace QRMenuAPI.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240313081709_Initial")]
+    [Migration("20240313122410_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -354,23 +354,6 @@ namespace QRMenuAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("States");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = (byte)0,
-                            Name = "Deleted"
-                        },
-                        new
-                        {
-                            Id = (byte)1,
-                            Name = "Active"
-                        },
-                        new
-                        {
-                            Id = (byte)2,
-                            Name = "Passive"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

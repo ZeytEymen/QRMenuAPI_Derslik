@@ -352,23 +352,6 @@ namespace QRMenuAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("States");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = (byte)0,
-                            Name = "Deleted"
-                        },
-                        new
-                        {
-                            Id = (byte)1,
-                            Name = "Active"
-                        },
-                        new
-                        {
-                            Id = (byte)2,
-                            Name = "Passive"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
