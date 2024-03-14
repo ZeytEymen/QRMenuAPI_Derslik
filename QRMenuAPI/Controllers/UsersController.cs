@@ -94,11 +94,6 @@ namespace QRMenuAPI.Controllers
                 return false;
             }
             signInResult = _signInManager.PasswordSignInAsync(applicationUser, passWord, false, false).Result;
-            if (signInResult.Succeeded == true)
-            {
-                claim = new Claim("CompanyId", applicationUser.CompanyId.ToString());
-                _signInManager.UserManager.AddClaimAsync(applicationUser, claim).Wait();
-            }
             return signInResult.Succeeded;
         }
 

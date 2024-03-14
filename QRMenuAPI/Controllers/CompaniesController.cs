@@ -9,6 +9,7 @@ using QRMenuAPI.Data;
 using QRMenuAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace QRMenuAPI.Controllers
 {
@@ -60,36 +61,15 @@ namespace QRMenuAPI.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         [Authorize(Roles = "CompanyAdministrator")]
-        public async Task<IActionResult> PutCompany(int id, Company company)
+        public ActionResult PutCompany(Company company)
         {
-            if (User.HasClaim("CompanyId", id.ToString()) == false)
+            if (User.HasClaim("CompanyId", company.Id.ToString()) == false)
             {
                 return Unauthorized();
             }
-            if (id != company.Id)
-            {
-                return BadRequest();
-            }
-
             _context.Entry(company).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CompanyExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            _context.SaveChanges();
+            return Ok();
         }
 
         [HttpPost]
@@ -97,6 +77,7 @@ namespace QRMenuAPI.Controllers
         public int PostCompany(Company company)
         {
             ApplicationUser applicationUser = new ApplicationUser();
+            Claim claim;
 
             _context.Companies.Add(company);
             _context.SaveChanges();
@@ -108,6 +89,8 @@ namespace QRMenuAPI.Controllers
             applicationUser.StateId = 1;
             applicationUser.UserName = "Administrator" + company.Id.ToString();
             _userManager.CreateAsync(applicationUser, "Admin123!").Wait();
+            claim = new Claim("CompanyId", company.Id.ToString());
+            _userManager.AddClaimAsync(applicationUser, claim).Wait();
             _userManager.AddToRoleAsync(applicationUser, "CompanyAdministrator").Wait();
             return company.Id;
         }
