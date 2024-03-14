@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 namespace QRMenuAPI;
 
 public class Program
-{
+{//deneme
     public static void Main(string[] args)
     {
         State state;

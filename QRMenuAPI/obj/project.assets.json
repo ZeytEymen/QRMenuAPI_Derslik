@@ -11658,11 +11658,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/derslik1-0/Projects/QRMenuAPI/QRMenuAPI/QRMenuAPI.csproj",
+      "projectUniqueName": "/Users/derslik1-0/Projects/apiDerslik/QRMenuAPI/QRMenuAPI.csproj",
       "projectName": "QRMenuAPI",
-      "projectPath": "/Users/derslik1-0/Projects/QRMenuAPI/QRMenuAPI/QRMenuAPI.csproj",
+      "projectPath": "/Users/derslik1-0/Projects/apiDerslik/QRMenuAPI/QRMenuAPI.csproj",
       "packagesPath": "/Users/derslik1-0/.nuget/packages/",
-      "outputPath": "/Users/derslik1-0/Projects/QRMenuAPI/QRMenuAPI/obj/",
+      "outputPath": "/Users/derslik1-0/Projects/apiDerslik/QRMenuAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/derslik1-0/.nuget/NuGet/NuGet.Config"

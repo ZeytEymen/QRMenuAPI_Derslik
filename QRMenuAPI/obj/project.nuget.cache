@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Pa06wl5TEZ3Z3+f/22gy/UjnCBbGoADiHYl72Aij23cva361hTY2fPS/iO1zUWEovXykzIFwUm1dukYrpGXsdg==",
+  "dgSpecHash": "hdHN91QogsXbWFMxOCISFsYRioASFAKXa3UU29o1Ivz5xvDr0KZS868gtke0S8nrK92h6dx0mwvAgb1IdJ2xBg==",
   "success": true,
-  "projectFilePath": "/Users/derslik1-0/Projects/QRMenuAPI/QRMenuAPI/QRMenuAPI.csproj",
+  "projectFilePath": "/Users/derslik1-0/Projects/apiDerslik/QRMenuAPI/QRMenuAPI.csproj",
   "expectedPackageFiles": [
     "/Users/derslik1-0/.nuget/packages/humanizer/2.14.1/humanizer.2.14.1.nupkg.sha512",
     "/Users/derslik1-0/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
