@@ -61,6 +61,7 @@ namespace QRMenuAPI.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         [Authorize(Roles = "CompanyAdministrator")]
+        [Authorize(Policy = "CompAdmin")]
         public ActionResult PutCompany(Company company)
         {
             if (User.HasClaim("CompanyId", company.Id.ToString()) == false)
